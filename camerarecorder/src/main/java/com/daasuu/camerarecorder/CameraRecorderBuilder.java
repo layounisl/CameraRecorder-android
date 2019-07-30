@@ -22,7 +22,7 @@ public class CameraRecorderBuilder {
 
     private LensFacing lensFacing = LensFacing.FRONT;
     private Resources resources;
-    private Activity activity;
+    private Context activity;
     private CameraRecordListener cameraRecordListener;
     private int fileWidth = 720;
     private int fileHeight = 1280;
@@ -34,7 +34,7 @@ public class CameraRecorderBuilder {
     private int cameraHeight = 720;
     private GlFilter glFilter;
 
-    public CameraRecorderBuilder(Activity activity, GLSurfaceView glSurfaceView) {
+    public CameraRecorderBuilder(Context activity, GLSurfaceView glSurfaceView) {
         this.activity = activity;
         this.glSurfaceView = glSurfaceView;
         this.resources = activity.getResources();
@@ -96,11 +96,6 @@ public class CameraRecorderBuilder {
         boolean isLandscapeDevice = resources.getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
 
         int degrees = 0;
-        if (isLandscapeDevice) {
-            int rotation = activity.getWindowManager().getDefaultDisplay().getRotation();
-            Log.d("CameraRecorder", "Surface.ROTATION_90 = " + Surface.ROTATION_90 + " rotation = " + rotation);
-            degrees = 90 * (rotation - 2);
-        }
 
         CameraRecorder cameraRecorder = new CameraRecorder(
                 cameraRecordListener,
